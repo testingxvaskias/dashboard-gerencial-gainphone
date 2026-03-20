@@ -1,0 +1,72 @@
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model ModelInteraction {
+  id                String   @id @default(uuid())
+  model_version     String   
+  intent            String   
+  sentiment         String   
+  sentiment_score   Float    
+  contained         Boolean  
+  satisfaction      Boolean? 
+  ai_precision      Boolean  
+  latency_ms        Int      
+  tokens_used       Int      
+  churn_risk        Boolean  
+  timestamp         DateTime @default(now())
+}
+
+// Keeping the other models in the schema to ensure Prisma generates all types accurately if needed, though they won't be queried here primarily.
+model CallRecord {
+  id                  String   @id @default(uuid())
+  call_id             String   @unique
+  campaign_id         String?
+  timestamp_start     DateTime
+  timestamp_end       DateTime
+  duration_seconds    Int
+  call_status         String
+  containment_status  Boolean
+  transfer_reason     String?
+  average_latency_ms  Int
+  interruptions_count Int
+  task_completed      Boolean
+  createdAt           DateTime @default(now())
+}
+
+model SurveyCall {
+  id                 String   @id @default(uuid())
+  call_id            String   @unique
+  campaign_id        String?
+  campaign_name      String?
+  call_date          DateTime
+
+  contact_status     String 
+  contact_sub_status String 
+
+  q_access_survey    Boolean @default(false)
+  q_vehicle_status   Boolean @default(false)
+  q_purchase_done    Boolean @default(false)
+  q_new_or_used      Boolean @default(false)
+  q_brand            Boolean @default(false)
+  q_type             Boolean @default(false)
+  q_model            Boolean @default(false)
+  q_why_model        Boolean @default(false)
+  q_where_bought     Boolean @default(false)
+  q_test_drive_offer Boolean @default(false)
+  q_test_drive_done  Boolean @default(false)
+  q_manager_intro    Boolean @default(false)
+  q_attention_rating Boolean @default(false)
+
+  purchase_completed  Boolean?
+  non_purchase_reason String?
+  vehicle_status      String?
+
+  target_rate Float    @default(50.0)
+  createdAt   DateTime @default(now())
+}
