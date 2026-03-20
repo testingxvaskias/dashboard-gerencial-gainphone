@@ -36,6 +36,16 @@ yarn-error.log*
 # vercel
 .vercel
 
+# node-waf configuration
+.lock-wscript
+
+# Agent and Reference Files
+884ce298-b2b8-4e1b-85bf-de54dd3ef97d.jpg
+Dashboard*Call*Center*IA*Demo*.pdf
+AGENTS.md
+CLAUDE.md
+.claude
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
