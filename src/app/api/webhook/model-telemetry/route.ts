@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 import { PrismaBetterSqlite3 } from '@prisma/adapter-better-sqlite3';
 
 // @ts-ignore
-const adapter = new PrismaBetterSqlite3({ url: process.env.DATABASE_URL?.replace("file:", "") || "C:/Users/ANDREY/OneDrive/Escritorio/dashboard-eljuri/dev.db" });
+const adapter = new PrismaBetterSqlite3({ url: (process.env.DATABASE_URL || "file:./prisma/dev.db").replace("file:", "") });
 const prisma = new PrismaClient({ adapter });
 
 export async function POST(request: Request) {
