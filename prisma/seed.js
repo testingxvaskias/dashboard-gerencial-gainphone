@@ -1,7 +1,10 @@
 require("dotenv").config();
 const { PrismaClient } = require("@prisma/client");
+const { PrismaBetterSqlite3 } = require("@prisma/adapter-better-sqlite3");
 
-const prisma = new PrismaClient();
+const dbUrl = (process.env.DATABASE_URL || "file:./prisma/dev.db").replace("file:", "");
+const adapter = new PrismaBetterSqlite3({ url: dbUrl });
+const prisma = new PrismaClient({ adapter });
 
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
