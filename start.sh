@@ -5,7 +5,7 @@ echo "==> Creating database directory..."
 mkdir -p /app/prisma
 
 echo "==> Running prisma db push..."
-npx prisma db push --skip-generate
+npx prisma db push
 
 echo "==> Seeding database..."
 node prisma/seed.js
